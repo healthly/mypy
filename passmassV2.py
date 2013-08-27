@@ -55,9 +55,9 @@ def change_password(child, user, oldpassword, newpassword):
     # Root does not require old password, so it gets to bypass the next step.
     #if i == 0 or i == 1:
     #    child.sendline(oldpassword)
-    child.expect(['[Nn]ew [Pp]assword','新的 密码'])
+    child.expect(['[Nn]ew [Pp]assword','新的 密码','新的 UNIX 密码'])
     child.sendline(newpassword)
-    i = child.expect(['[Nn]ew [Pp]assword', '[Rr]etype', '[Rr]e-enter','重新输入新的 密码'])
+    i = child.expect(['[Nn]ew [Pp]assword', '[Rr]etype', '[Rr]e-enter','重新输入新的 密码','重新输入新的 UNIX 密码'])
     if i == 0:
         print 'Host did not like new password. Here is what it said...'
         print child.before
