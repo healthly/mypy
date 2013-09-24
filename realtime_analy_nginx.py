@@ -6,7 +6,7 @@ from pymongo import Connection
 from datetime import timedelta
 from pymongo.errors import ConnectionFailure
 _utcnow = datetime.utcnow()
-
+import argparse
 def insertR(dbC, collect, data):
 	dbC[collect].insert(data, save=True)
 
@@ -103,9 +103,20 @@ def getLogItems(weblog,*args):
 	return (logIn,logOut)
 		
 def main():
-	i = getWeblog('localhost',27017,'nginx111',-10)
-	m = getLogItems(i,u'method',u'referer',u'code',u'size',u'agent')[1]
-	countIP_URL(logOut)
+	parser = argparse.ArgumentParser(description='analy nginx log from mongodb')
+
+	parser.add_argument('-H', dest="dbhost", default='localhost', help="mongodb's ip or hostname")
+	parser.add_argument('-N', dest="dbname", default='nginx111', help="mongodb's dbname")
+	parser.add_argument('--ipurlnums', dest="ipurlnums", action='store_true', help="output ip and urls")
+	#parser.add_argument('-N', dest="dbname", type=int)
+
+	args = parser.parse_args()
+	if args.ipurlnums:
+		i = getWebLog(args.dbhost,27017,args.dbname,-10)
+		m = getLogItems(i,u'method',u'referer',u'code',u'size',u'agent')[1]
+		countIP_URL(m)
+	else:
+		parser.print_help()
 	#c1 = u'nginx111'
 	#insertR(dbC, c1, logIn)
 	
