@@ -108,8 +108,6 @@ def main():
 	countIP_URL(logOut)
 	#c1 = u'nginx111'
 	#insertR(dbC, c1, logIn)
-	#c2 = u'nginx55'
-	#insertR(dbC, c2, logOut)
 	
 
 if __name__ == "__main__":
