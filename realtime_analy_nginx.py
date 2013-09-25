@@ -9,9 +9,9 @@ from pymongo.errors import ConnectionFailure
 _utcnow = datetime.utcnow()
 
 def code404percent(logList):
-   return 404
-
-
+	return 404
+    	
+	
 
 
 def insertR(dbC, collect, data):
@@ -123,18 +123,18 @@ def getLogItems(weblog,*args):
    return (logIn,logOut)
 
 def main():
-   parser = argparse.ArgumentParser(description='analy nginx log from mongodb')
-   parser.add_argument('-H', dest="dbhost", default='localhost', help="mongodb's ip or hostname")
-   parser.add_argument('-N', dest="dbname", default='nginx111', help="mongodb's dbname")
-   parser.add_argument('--ipurlcode', dest="ipurlcode", action='store_true', help="output out ip ,urls ,codes")
-   #parser.add_argument('-N', dest="dbname", type=int)
+	parser = argparse.ArgumentParser(description='analy nginx log from mongodb')
+	parser.add_argument('-H', dest="dbhost", default='localhost', help="mongodb's ip or hostname")
+	parser.add_argument('-N', dest="dbname", default='nginx111', help="mongodb's dbname")
+	parser.add_argument('--ipurlcode', dest="ipurlcode", action='store_true', help="output out ip ,urls ,codes")
+	#parser.add_argument('-N', dest="dbname", type=int)
    
-   args = parser.parse_args()
-   if args.ipurlcode:
+	args = parser.parse_args()
+	if args.ipurlcode:
       i = getWebLog(args.dbhost,27017,args.dbname,-10)
       m = getLogItems(i,u'method',u'referer',u'code',u'size',u'agent')[1]
       countIP_URL_code(m)
-   else:
+	else:
       parser.print_help()
 #c1 = u'nginx1'
 #insertR(dbC, c1, logIn)
